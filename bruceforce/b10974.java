@@ -20,6 +20,7 @@ public class b10974 {
 		if (front == -1)
 		return false;
 		
+		
 		for(int i = len-1; i>front ;i--)
 		{
 			if(arr[front]<arr[i])
@@ -28,12 +29,23 @@ public class b10974 {
 				break;
 			}
 		}
+
 		
-		int temp = front;
-		front = back;
-		back= temp;
 		
-		System.out.printf("%d %d", arr[front], arr[back]);
+		int temp = arr[front];
+		arr[front] = arr[back];
+		arr[back]= temp;
+		int first = front+1;
+		int last = len-1;
+		
+		while(first<=last)
+		{
+			temp = arr[first];
+			arr[first] = arr[last];
+			arr[last]= temp;
+			first++;
+			last--;
+		}
 		return true;
 	}
 
@@ -46,9 +58,18 @@ public class b10974 {
 		
 		for(int i=0;i<num;i++)
 		{
-			arr[i] = sc.nextInt();
+			arr[i] = i+1;
+			System.out.printf("%d ", arr[i]);
 		}
-		next(arr);
+		System.out.println();
+
+		
+		while(next(arr))
+		{
+			for(int i=0; i<num ;i++)
+				System.out.printf("%d ", arr[i]);
+			System.out.println();
+		}
 		
 	}
 }
