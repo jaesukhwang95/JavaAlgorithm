@@ -1,8 +1,17 @@
 package baekjoon.bruceforce;
 
 import java.util.Scanner;
+import java.util.Arrays;
 
-public class b10974 {
+public class b10819 {
+	
+	public static int abs (int a)
+	{
+		if(a>=0)
+			return a;
+		else
+			return -a;
+	}
 	
 	public static boolean next(int[] arr)
 	{
@@ -49,28 +58,35 @@ public class b10974 {
 		return true;
 	}
 
-	public static void main(String args[])
+	public static void main(String[] args)
 	{
-		
 		Scanner sc = new Scanner(System.in);
 		int num = sc.nextInt();
-		int [] arr = new int[num];
-		
-		for(int i=0;i<num;i++)
+		int [] arr = new int [num];
+		for(int i=0; i<num ;i++)
 		{
-			arr[i] = i+1;
-			System.out.printf("%d ", arr[i]);
+			arr[i] = sc.nextInt();
 		}
-		System.out.println();
-
-		
+		Arrays.sort(arr);
+		int sum = 0;
+		for(int i=0; i<num-1 ;i++)
+		{
+		   	sum = sum + abs(arr[i]-arr[i+1]);
+		}
+		int max = sum;
 		while(next(arr))
 		{
-			for(int i=0; i<num ;i++)
-				System.out.printf("%d ", arr[i]);
-			System.out.println();
+			sum =0;
+			for(int i=0; i<num-1 ;i++)
+			{
+			   	sum = sum + abs(arr[i]-arr[i+1]);
+			}
+			if(sum>max)
+				max = sum;
 		}
 		
+		System.out.printf("%d\n", max);
 		sc.close();
 	}
 }
+
