@@ -50,6 +50,7 @@ public class b6603 {
 
 	public static void main(String[] args)
 	{
+
 		Scanner sc = new Scanner(System.in);
 		int [] sel = new int [6];
 		int j = 0;

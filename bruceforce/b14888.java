@@ -120,5 +120,6 @@ public class b14888 {
 		}
 		System.out.printf("%d\n", max);
 		System.out.printf("%d\n", min);
+		sc.close();
 	}
 }
