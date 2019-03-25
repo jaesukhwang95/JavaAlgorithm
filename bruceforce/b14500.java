@@ -189,5 +189,6 @@ public class b14500 {
 		
 		
 		System.out.printf("%d ", max);
+		sc.close();
 	}
 }

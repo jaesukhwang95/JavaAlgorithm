@@ -58,6 +58,7 @@ public class b6603 {
 		{
 			int num = sc.nextInt();
 			if(num==0)
+				sc.close();
 				System.exit(0);
 			int [] arr = new int [num];
 			int [] idx = new int [num];
