@@ -48,5 +48,6 @@ public class b1759 {
 		}
 		Arrays.sort(arr);
 		go(arr,sol,num,0);
+		sc.close();
 	}
 }
