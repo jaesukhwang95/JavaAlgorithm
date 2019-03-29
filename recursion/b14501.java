@@ -12,7 +12,7 @@ public class b14501 {
 		if(idx == day.length)
 		{
 			arr.add(sum);
-			return;
+			return;	
 		}
 		if(idx > day.length)
 			return;
