@@ -26,7 +26,6 @@ public class b13023{
 				if(!c[i])
 					dfs(i, cnt+1);
 			}
-			c[x] = false;
 		}
 		
 	    public static void main(String[] args) {
