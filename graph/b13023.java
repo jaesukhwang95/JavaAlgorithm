@@ -11,6 +11,8 @@ public class b13023{
 		
 		public static void dfs(int x, int cnt)
 		{
+			if(c[x])
+				return;
 			if(cnt == 5)
 			{
 				ans = true;
@@ -19,9 +21,11 @@ public class b13023{
 			c[x] = true;
 			for(int i : a[x])
 			{
+				if(c[i])
+					continue;
 				if(!c[i])
-					dfs(i, cnt+1);	
-			}		
+					dfs(i, cnt+1);
+			}
 		}
 		
 	    public static void main(String[] args) {
