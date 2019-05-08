@@ -2,7 +2,7 @@ package baekjoon.math;
 
 import java.util.Scanner;
 
-public class b1929 {
+public class b6588 {
 
 	public static boolean prime (int num)
 	{
@@ -25,12 +25,12 @@ public class b1929 {
 		int num;
 		int pn=0;
 		Scanner sc = new Scanner(System.in);
-		while(true)
+		while(true)	
 		{
 			num = sc.nextInt();
 			if(num==0)
 				break;
-			for(int i=2;i<=num/2;i++)
+			for(int i=3;i<=num/2+1;i++)
 			{
 				if(prime(i) && prime(num-i))
 				{
