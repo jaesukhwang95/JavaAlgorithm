@@ -1,53 +1,50 @@
 package baekjoon.graph;
 import java.util.*;
+import java.io.*;
 
 public class b11724 {
 	
-	public static boolean c[];
-	public static ArrayList<Integer>[] a;
-	public static void dfs(int x)
+	private static int[][] arr;
+	private static boolean[] visit;
+	private static int n;
+	
+	public static void dfs(int start)
 	{
-		if(c[x])
+		if(visit[start])
 			return;
-		c[x]= true;
-		for(int i: a[x])
+		visit[start] = true;
+		for(int i=1; i<=n; i++)
 		{
-			if(!c[i])
+			if(arr[i][start] == 1)
 				dfs(i);
 		}
-		
 	}
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
-		Scanner sc = new Scanner(System.in);
-		int n = sc.nextInt();
-		int m = sc.nextInt();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
 		int cnt = 0;
-		a = (ArrayList<Integer>[]) new ArrayList[n+1];
-		for(int  i=1; i<=n ;i++)
+		n = Integer.parseInt(st.nextToken());
+		int m = Integer.parseInt(st.nextToken());
+		arr = new int [n+1][n+1];
+		visit = new boolean[n+1];
+		for(int i=0; i<m ; i++)
 		{
-			a[i] = new ArrayList<Integer>();
-		}
-		c = new boolean [n+1];
-		for(int i=1; i<=m ;i++)
-		{
-			int u = sc.nextInt();
-			int v = sc.nextInt();
-			a[u].add(v);
-			a[v].add(u);
+			st = new StringTokenizer(br.readLine());
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			arr[a][b] = 1;
+			arr[b][a] = 1;
 		}
 		for(int i=1; i<=n ;i++)
-			Collections.sort(a[i]);
-		for(int i=1; i<=n ;i++)
 		{
-			if(!c[i])
+			if(!visit[i])
 			{
-			dfs(i);
-			cnt++;
+				dfs(i);
+				cnt++;
 			}
 		}
-		System.out.print(cnt);
+		System.out.println(cnt);
 	}
-
 }

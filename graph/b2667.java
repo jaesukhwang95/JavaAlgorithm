@@ -1,78 +1,79 @@
 package baekjoon.graph;
 
 import java.util.*;
+import java.io.*;
 
 public class b2667 {
 	
-	public static final int dx[] = {1,-1, 0, 0};
-	public static final int dy[] = {0,0, -1, 1};
+	private static final int[] dx = {1,-1,0,0};
+	private static final int[] dy = {0,0,1,-1};
+	private static int n;
+	private static int[][] arr;
+	private static int[][] group;
+	private static int[] res;
+	private static int cnt;
 	
-	public static void dfs(int x, int y, int cnt, int [][]ox, int[][]group, int n)
+	public static void dfs(int i, int j)
 	{
-		if(group[x][y]!=0)
+		if(group[i][j] != 0)
 			return;
-		group[x][y] = cnt;
-		for(int i=0; i<4 ;i++)
+		group[i][j] = cnt;
+		for(int k=0; k<4; k++)
 		{
-			int nx = dx[i] + x;
-			int ny = dy[i] + y;
-			
-			if(0 <= nx && nx< n && 0 <= ny && ny< n)
+			int x = i + dx[k];
+			int y = j + dy[k];
+			if(1<=x && x<=n && 1<=y && y<=n && group[x][y]==0 && arr[x][y]==1)
 			{
-				if(ox[nx][ny]==1 && group[nx][ny]==0)
-				{
-					dfs(nx, ny, cnt, ox, group, n);
-				}
+				dfs(x, y);
 			}
 		}
-		
-		
 	}
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
-		Scanner sc = new Scanner(System.in);
-		int t = sc.nextInt();
-		int [][] ox = new int [t][t];
-		int [][] group = new int [t][t];
-		int cnt = 0;
-		
-		for(int i=0; i<t ;i++)
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringBuilder sb = new StringBuilder();
+		n = Integer.parseInt(br.readLine());
+		arr = new int[n+1][n+1];
+		group = new int[n+1][n+1];
+		cnt = 0;
+		for(int i=1; i<=n ; i++)
 		{
-			String s = sc.next();
-			for(int j=0; j<t ;j++)
-		{
-			ox[i][j] = s.charAt(j)-'0';
-		}
-		}
-		
-		for(int i=0; i<t ;i++)
-		{
-			for(int j=0; j<t ;j++)
+			String str = br.readLine();
+			for(int j=1; j<=n ; j++)
 			{
-				if(ox[i][j]==1 && group[i][j]==0)
+				arr[i][j] = str.charAt(j-1)-'0';
+			}
+		}
+		for(int i=1; i<=n ; i++)
+		{
+			for(int j=1; j<=n ; j++)
+			{
+				if(group[i][j]==0 && arr[i][j]==1)
 				{
-					cnt += 1;
-					dfs(i, j, cnt, ox, group, t);
+					cnt++;
+					dfs(i, j);
 				}
 			}
 		}
-		
-		int [] ans =new int [cnt];
-		for(int i=0; i<t ;i++)
-			for(int j=0; j<t ;j++)
-			{
-				if(group[i][j]!=0)
-					ans[group[i][j]-1] += 1;
-			}
-		
-		
-		Arrays.sort(ans);
-		System.out.printf("%d\n", cnt);
-		for(int i=0; i<cnt ;i++)
+		res = new int[cnt];
+		for(int i=1; i<=n ; i++)
 		{
-			System.out.printf("%d\n", ans[i]);
+			for(int j=1; j<=n ; j++)
+			{
+				if(group[i][j] != 0)
+				res[group[i][j]-1]++;
+			}
 		}
+		Arrays.sort(res);
+		sb.append(cnt+"\n");
+		for(int i=0; i<cnt; i++)
+		{
+			sb.append(res[i]+"\n");
+		}
+		bw.write(sb.toString());
+		br.close();
+		bw.close();
 	}
-
 }

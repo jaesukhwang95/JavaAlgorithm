@@ -1,68 +1,75 @@
 package baekjoon.graph;
-
 import java.util.*;
+import java.io.*;
 
 public class b1707 {
 	
-	public static ArrayList<Integer>[] a;
-	public static boolean ans=true;
+	private static ArrayList<Integer>[] arr;
+	private static int[] visit;
+	private static int n;
 	
-	public static void dfs(int x, int clr, int [] color)
+	public static void dfs(int x, int check)
 	{
-		if(color[x]!=0)
-			return;
-		color[x] = clr;
-		for(int i:a[x])
+		visit[x] = check;
+		for(int i: arr[x])
 		{
-			if(color[i]==0)
-				dfs(i, 3-clr, color);
+			if(visit[i] == 0)
+				dfs(i, 3-check);
 		}
 	}
-
-	public static void main(String[] args)
+	
+	public static void main(String[] args) throws IOException
 	{
-		Scanner sc = new Scanner(System.in);
-		int total = sc.nextInt();
-		while(total-->0)
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringBuilder sb = new StringBuilder();
+		int t = Integer.parseInt(br.readLine());
+		while(t-->0)
 		{
-			ans = true;
-			int n = sc.nextInt();
-			int m = sc.nextInt();
-			a = (ArrayList<Integer>[]) new ArrayList[n+1];
-			for(int i=1; i<=n ;i++)
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			n = Integer.parseInt(st.nextToken());
+			int m = Integer.parseInt(st.nextToken());
+			arr = new ArrayList[n+1];
+			visit = new int[n+1];
+			for(int i=1; i<=n ; i++)
 			{
-				a[i] = new ArrayList<Integer>();
+				arr[i] = new ArrayList<Integer>();
 			}
-			int [] color = new int [n+1];
-			Arrays.fill(color,0);
-			for(int i=1; i<=m ;i++)
+			for(int i=0; i<m ; i++)
 			{
-				int u = sc.nextInt();
-				int v = sc.nextInt();
-				a[u].add(v);
-				a[v].add(u);
+				st = new StringTokenizer(br.readLine());
+				int a = Integer.parseInt(st.nextToken());
+				int b = Integer.parseInt(st.nextToken());
+				arr[a].add(b);
+				arr[b].add(a);
 			}
-			for(int i=1; i<=n ;i++)
+			for(int i=1; i<=n ; i++)
 			{
-				Collections.sort(a[i]);	
+				if(visit[i] == 0)
+					dfs(i, 1);
 			}
-			for(int i=1; i<=n ;i++)
-			{
-				if(color[i] == 0)
-				dfs(i, 1, color);
-			}
+			boolean signal = true;
 			for(int i=1; i<=n; i++)
 			{
-				for(int j: a[i])
-				{
-					if(color[i] == color[j])
-						ans = false;
+				for(int j: arr[i])
+				{	
+					if(visit[i] == visit[j])
+					{
+						signal = false;
+						break;
+					}
+					
 				}
+				if(!signal)
+					break;
 			}
-			if(ans)
-				System.out.println("YES");
+			if(signal)
+				sb.append("YES").append("\n");
 			else
-				System.out.println("NO");
+				sb.append("NO").append("\n");
 		}
+		bw.write(sb.toString());
+		bw.close();
+		br.close();
 	}
 }

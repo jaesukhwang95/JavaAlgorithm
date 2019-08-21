@@ -1,70 +1,80 @@
 package baekjoon.graph;
 import java.util.*;
+import java.io.*;
 
 public class b1260 {
-	static ArrayList<Integer>[] a;
-	static boolean[] c;
+	
+	private static int[][] arr;
+	private static boolean[] visit;
+	private static int n;
+	private static StringBuilder sb = new StringBuilder();
 	
 	public static void dfs(int x)
 	{
-		if(c[x])
+		if(visit[x])
 			return;
-		c[x]=true;
-		System.out.print(x + " ");
-		for(int i: a[x])
+		visit[x] = true;
+		sb.append(x).append(" ");
+		for(int i=1; i<=n ; i++)
 		{
-			if(!c[i])
+			if(arr[x][i] == 1)
 				dfs(i);
 		}
-		
 	}
 	
 	public static void bfs(int x)
 	{
+		if(visit[x])
+			return;
+		visit[x] = true;
+		sb.append(x).append(" ");
 		Queue<Integer> q = new LinkedList<Integer>();
-		q.add(x);
-		c[x] = true;
+		q.offer(x);
 		while(!q.isEmpty())
 		{
-			int y = q.remove();
-			System.out.print(y + " ");
-			for(int i: a[y])
+			int p = q.poll();
+			for(int i=1; i<=n ; i++)
 			{
-				if(!c[i])
+				if(arr[p][i]==1 && !visit[i])
 				{
-					c[i] = true;
-					q.add(i);
+					visit[i] = true;
+					sb.append(i).append(" ");
+					q.offer(i);
 				}
 			}
 		}
 	}
 	
-	public static void main(String[] args)
+	public static void main (String[] args) throws IOException
 	{
-		Scanner sc = new Scanner(System.in);
-		int n = sc.nextInt();
-		int m = sc.nextInt();
-		int start = sc.nextInt();
-		a = (ArrayList<Integer>[]) new ArrayList[n+1];
-		for(int i=1; i<=n; i++)
-		{
-			a[i] = new ArrayList<Integer>();
-		}
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		int m = Integer.parseInt(st.nextToken());
+		int start = Integer.parseInt(st.nextToken());
+		
+		arr = new int[n+1][n+1];
+		visit = new boolean[n+1];
+		
 		for(int i=0; i<m ;i++)
 		{
-			int u = sc.nextInt();
-			int v = sc.nextInt();
-			a[u].add(v);
-			a[v].add(u);
+			st = new StringTokenizer(br.readLine());
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			arr[a][b] = 1;
+			arr[b][a] = 1;
 		}
-		for(int i=1; i<=n; i++)
-		{
-			Collections.sort(a[i]);
-		}
-		c = new boolean[n+1];
+		
 		dfs(start);
-		System.out.println();
-		c = new boolean[n+1];
+		sb.append("\n");
+		visit = new boolean[n+1];
 		bfs(start);
+		sb.append("\n");
+		
+		bw.write(sb.toString());
+		br.close();
+		bw.close();
 	}
 }

@@ -1,62 +1,69 @@
 package baekjoon.graph;
 
 import java.util.*;
+import java.io.*;
 
 public class b4963 {
 	
-	public static final int dx[]= {1,1,1,0,0,-1,-1,-1};
-	public static final int dy[]= {1,0,-1,1,-1,1,0,-1};
+	private static int[] dx = {0,0,1,1,1,-1,-1,-1};
+	private static int[] dy = {1,-1,-1,0,1,-1,0,1};
+	private static int[][] group;
+	private static int[][] arr;
+	private static int cnt, n, m;
 	
-	public static void dfs (int x,int y, int [][]ox, int [][]count, int cnt, int w, int h)
+	public static void dfs(int a, int b)
 	{
-		if(count[y][x]!=0)
+		if(group[a][b]!=0)
 			return;
-		
-		count[y][x]=cnt;
-		for(int i=0; i<8; i++)
-		{
-			int nx = x+ dx[i];
-			int ny = y+ dy[i];
-			if(0 <= nx && nx < w && 0 <= ny && ny < h && ox[ny][nx]==1)
+		group[a][b] = cnt;
+		for(int i=0; i<8 ;i++)
+			for(int j=0; j<8 ;j++)
 			{
-				dfs(nx, ny, ox, count, cnt, w, h);
+				int x = dx[i] + a;
+				int y = dy[j] + b;
+				if(1<=x && x<=n && 1<=y && y<=m && arr[x][y]==1)
+				{
+					dfs(x, y);
+				}
 			}
-		}
-		
 	}
-
-	public static void main(String[] args)
+	
+	public static void main(String[] args) throws IOException
 	{
-		Scanner sc = new Scanner(System.in);
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		StringBuilder sb = new StringBuilder();
 		while(true)
 		{
-			int w = sc.nextInt();
-			int h = sc.nextInt();
-			int cnt = 0;
-			
-			if(w==0 && h ==0)
-				System.exit(0);
-			
-			int ox[][] = new int [h][w];
-			for(int i=0; i<h ;i++)
-				for(int j=0; j<w ;j++)
-				{
-					ox[i][j] = sc.nextInt();
-				}
-			int count[][] = new int [h][w];
-			for(int i=0; i<h ;i++)
+			cnt=0;
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			m = Integer.parseInt(st.nextToken());
+			n = Integer.parseInt(st.nextToken());
+			if(n==0 && m==0)
+				break;
+			arr = new int[n+1][m+1];
+			group = new int[n+1][m+1];
+			for(int i=1; i<=n ; i++)
 			{
-				for(int j=0; j<w ;j++)
+				st = new StringTokenizer(br.readLine());
+				for(int j=1; j<=m; j++)
 				{
-					if(ox[i][j]==1 && count[i][j]==0)
-					{
-						cnt = cnt+1;
-						dfs(j, i, ox, count, cnt, w, h);
-					}
+					arr[i][j] = Integer.parseInt(st.nextToken());
 				}
 			}
-			
-			System.out.printf("%d\n", cnt);
+			for(int i=1; i<=n ; i++)
+				for(int j=1; j<=m; j++)
+				{
+					if(group[i][j] == 0 && arr[i][j] == 1)
+					{
+						cnt++;
+						dfs(i, j);
+					}
+				}
+			sb.append(cnt).append("\n");
 		}
+		bw.write(sb.toString());
+		bw.close();
+		br.close();
 	}
 }
