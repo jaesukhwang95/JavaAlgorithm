@@ -18,7 +18,6 @@ public class b1463 {
 			{
 				d[i] = d[i/2] + 1;
 			}
-			System.out.println(d[i]);
 		}
 		return d[n];
 	}
