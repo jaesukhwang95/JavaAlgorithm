@@ -1,4 +1,4 @@
-package baekjoon.dynamic;
+package baekjoon.dynamicprogramming;
 import java.io.*;
 
 public class b2579 {
