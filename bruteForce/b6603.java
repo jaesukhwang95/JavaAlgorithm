@@ -1,17 +1,7 @@
-package baekjoon.bruceforce;
-
+package baekjoon.bruteForce;
 import java.util.Scanner;
-import java.util.Arrays;
 
-public class b10819 {
-	
-	public static int abs (int a)
-	{
-		if(a>=0)
-			return a;
-		else
-			return -a;
-	}
+public class b6603 {
 	
 	public static boolean next(int[] arr)
 	{
@@ -60,33 +50,48 @@ public class b10819 {
 
 	public static void main(String[] args)
 	{
+
 		Scanner sc = new Scanner(System.in);
-		int num = sc.nextInt();
-		int [] arr = new int [num];
-		for(int i=0; i<num ;i++)
+		int [] sel = new int [6];
+		int j = 0;
+		while(true)
 		{
-			arr[i] = sc.nextInt();
-		}
-		Arrays.sort(arr);
-		int sum = 0;
-		for(int i=0; i<num-1 ;i++)
-		{
-		   	sum = sum + abs(arr[i]-arr[i+1]);
-		}
-		int max = sum;
-		while(next(arr))
-		{
-			sum =0;
-			for(int i=0; i<num-1 ;i++)
+			int num = sc.nextInt();
+			if(num==0)
+				sc.close();
+				System.exit(0);
+			int [] arr = new int [num];
+			int [] idx = new int [num];
+			for(int i=0; i<num ;i++)
 			{
-			   	sum = sum + abs(arr[i]-arr[i+1]);
+				arr[i] = sc.nextInt();
 			}
-			if(sum>max)
-				max = sum;
+			for(int i=0; i<6 ;i++)
+			{
+				idx[i] = 1;
+			}
+			for(int i=6; i<num ;i++)
+			{
+				idx[i] = 2;
+			}
+			boolean jud = true;
+			while(jud)
+			{
+				j = 0;
+				for(int i=0; i<num ;i++)
+				{
+					if(idx[i]==1)
+					{
+						sel[j] = arr[i];
+						System.out.printf("%d ", sel[j]);
+						j++;
+					}
+				}
+				System.out.println();
+				jud = next(idx);
+			}
+			System.out.println();
 		}
 		
-		System.out.printf("%d\n", max);
-		sc.close();
 	}
 }
-

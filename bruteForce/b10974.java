@@ -1,7 +1,8 @@
-package baekjoon.bruceforce;
+package baekjoon.bruteForce;
+
 import java.util.Scanner;
 
-public class b6603 {
+public class b10974 {
 	
 	public static boolean next(int[] arr)
 	{
@@ -48,50 +49,28 @@ public class b6603 {
 		return true;
 	}
 
-	public static void main(String[] args)
+	public static void main(String args[])
 	{
-
+		
 		Scanner sc = new Scanner(System.in);
-		int [] sel = new int [6];
-		int j = 0;
-		while(true)
+		int num = sc.nextInt();
+		int [] arr = new int[num];
+		
+		for(int i=0;i<num;i++)
 		{
-			int num = sc.nextInt();
-			if(num==0)
-				sc.close();
-				System.exit(0);
-			int [] arr = new int [num];
-			int [] idx = new int [num];
+			arr[i] = i+1;
+			System.out.printf("%d ", arr[i]);
+		}
+		System.out.println();
+
+		
+		while(next(arr))
+		{
 			for(int i=0; i<num ;i++)
-			{
-				arr[i] = sc.nextInt();
-			}
-			for(int i=0; i<6 ;i++)
-			{
-				idx[i] = 1;
-			}
-			for(int i=6; i<num ;i++)
-			{
-				idx[i] = 2;
-			}
-			boolean jud = true;
-			while(jud)
-			{
-				j = 0;
-				for(int i=0; i<num ;i++)
-				{
-					if(idx[i]==1)
-					{
-						sel[j] = arr[i];
-						System.out.printf("%d ", sel[j]);
-						j++;
-					}
-				}
-				System.out.println();
-				jud = next(idx);
-			}
+				System.out.printf("%d ", arr[i]);
 			System.out.println();
 		}
 		
+		sc.close();
 	}
 }
