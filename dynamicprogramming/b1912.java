@@ -1,4 +1,4 @@
-package baekjoon.dynamicprogramming;
+package baekjoon.dynamicProgramming;
 import java.io.*;
 import java.util.*;
 
