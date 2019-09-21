@@ -3,7 +3,7 @@ package baekjoon.bruteForce;
 import java.util.Scanner;
 import java.util.Arrays;
 
-class b2309 {
+public class b2309 {
 	
 	public static void main(String[] args)
 	{
