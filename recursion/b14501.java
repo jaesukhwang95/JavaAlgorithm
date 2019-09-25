@@ -1,4 +1,4 @@
-package baekjoon.recursion;
+	package baekjoon.recursion;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;

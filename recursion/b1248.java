@@ -2,8 +2,6 @@ package baekjoon.recursion;
 import java.io.*;
 import java.util.*;
 
-// + : 1 , - : -1, 0 : 0
- 
 public class b1248 {
 	
 	public static char [][] s;
