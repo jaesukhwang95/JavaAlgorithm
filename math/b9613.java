@@ -38,7 +38,6 @@ public class b9613 {
 						sum = sum.add(BigInteger.valueOf(gcd(a[i],a[j])));
 				}
 				System.out.printf("%d\n", sum);
- 			
 		}
 		sc.close();
 	}
