@@ -3,38 +3,33 @@ package baekjoon.recursion;
 import java.util.*;
 import java.io.*;
 
-public class b15663 {
+public class b15666 {
 
-	public static void go(int idx) {
+	public static int n, m;
+	public static int[] cnt;
+	public static ArrayList<Integer> arr;
+	public static int[] el;
+	public static StringBuilder ans = new StringBuilder();
+
+	public static void go(int idx, int start) {
 		if (idx == m) {
 			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < m; i++) {
-				sb.append(ans[i]);
+				sb.append(el[i]);
 				if (i != m - 1)
 					sb.append(" ");
 			}
 			sb.append("\n");
-			s.append(sb.toString());
+			ans.append(sb);
 			return;
 		}
-		for (int i = 0; i < arr.size(); i++) {
-			if (cnt[arr.get(i)] > 0) {
-				ans[idx] = arr.get(i);
-				cnt[arr.get(i)]--;
-				go(idx + 1);
-				ans[idx] = 0;
-				cnt[arr.get(i)]++;
-			}
+		for (int i = start; i < arr.size(); i++) {
+			el[idx] = arr.get(i);
+			go(idx + 1, i);
+			el[idx] = 0;
+
 		}
 	}
-
-	public static int n, m;
-	public static int[] tmp;
-	public static int[] cnt = new int[10001];
-	public static TreeSet<Integer> set = new TreeSet<Integer>();
-	public static ArrayList<Integer> arr = new ArrayList<Integer>();
-	public static int[] ans;
-	public static StringBuilder s = new StringBuilder();
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -42,8 +37,10 @@ public class b15663 {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		n = Integer.parseInt(st.nextToken());
 		m = Integer.parseInt(st.nextToken());
-		tmp = new int[n];
-		ans = new int[m];
+		int[] tmp = new int[n];
+		TreeSet<Integer> set = new TreeSet<Integer>();
+		cnt = new int[10001];
+		el = new int[m];
 		st = new StringTokenizer(br.readLine());
 		for (int i = 0; i < n; i++) {
 			tmp[i] = Integer.parseInt(st.nextToken());
@@ -54,9 +51,10 @@ public class b15663 {
 			set.add(tmp[i]);
 		}
 		arr = new ArrayList<Integer>(set);
-		go(0);
-		bw.write(s.toString());
+		go(0, 0);
+		bw.write(ans.toString());
 		bw.close();
 		br.close();
 	}
+
 }
