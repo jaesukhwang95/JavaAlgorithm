@@ -1,8 +1,9 @@
 package baekjoon.samsung.level3;
 
 import java.io.*;
+import java.util.*;
 
-public class s5549 {
+public class s6692 {
 	
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -11,18 +12,17 @@ public class s5549 {
 		int t = Integer.parseInt(br.readLine());
 		for(int i=1; i<=t ;i++)
 		{
-			String str = br.readLine();
-			if((str.charAt(str.length()-1) - '0') % 2 == 0)
+			int n = Integer.parseInt(br.readLine());
+			float sum = 0;
+			for(int j=0; j<n; j++)
 			{
-				sb.append("#").append(i).append(" ").append("Even").append("\n");
+				StringTokenizer st = new StringTokenizer(br.readLine());
+				sum += Float.parseFloat(st.nextToken()) * Float.parseFloat(st.nextToken());
 			}
-			else
-			{
-				sb.append("#").append(i).append(" ").append("Odd").append("\n");
-			}	
+			sb.append("#").append(i).append(" ").append(sum).append("\n");
 		}
 		bw.write(sb.toString());
-		br.close();
 		bw.close();
+		br.close();
 	}
 }
