@@ -45,7 +45,7 @@ public class b9376 {
 					}
 				}
 				else if(jail[nx][ny] == '#')
-				{
+				{ 
 					if(dist[nx][ny] == -1 || dist[nx][ny] > dist[x][y] + 1) {
 						dist[nx][ny] = dist[x][y] + 1;
 						q.offer(new Pair(nx, ny));
