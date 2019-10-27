@@ -5,7 +5,6 @@ import java.io.*;
 public class b12865 {
 	
 	public static void main(String[] args) throws IOException{
-		System.setIn(new FileInputStream("/Users/mac/dev/input.txt"));
 		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int n = Integer.parseInt(st.nextToken());
