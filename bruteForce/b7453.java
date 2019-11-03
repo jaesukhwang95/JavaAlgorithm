@@ -55,13 +55,13 @@ public class b7453 {
 		int total = Integer.parseInt(br.readLine());
 		long cnt = 0;
 		int k = 0;
-		int l = 0;
+		int l = 0;	
 		int[] a = new int[total];
 		int[] b = new int[total];
 		int[] c = new int[total];
 		int[] d = new int[total];
 		int[] arr1 = new int[total * total];
-		int[] arr2 = new int[total * total];		
+		int[] arr2 = new int[total * total];
 
 		for (int i = 0; i < total; i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
