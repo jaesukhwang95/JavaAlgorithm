@@ -126,7 +126,7 @@ public class b15683 {
 	public static int row;
 	public static int col;
 
-	public static void indexGenerator(int n, int r, LinkedList<Integer> indexList) {
+	public static void blindSpot(int n, int r, LinkedList<Integer> indexList) {
 		if (indexList.size() == r) {
 			int k = 0;
 			int cnt = 0;
@@ -153,7 +153,7 @@ public class b15683 {
 		}
 		for (int i = 0; i < n; i++) {
 			indexList.add(i);
-			indexGenerator(n, r, indexList);
+			blindSpot(n, r, indexList);
 			indexList.removeLast();
 		}
 	}
@@ -176,7 +176,7 @@ public class b15683 {
 		}
 		min = Integer.MAX_VALUE;
 		LinkedList<Integer> indexList = new LinkedList<Integer>();
-		indexGenerator(4, set.size(), indexList);
+		blindSpot(4, set.size(), indexList);
 		System.out.println(min);
 
 	}
