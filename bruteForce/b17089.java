@@ -4,30 +4,6 @@ import java.io.*;
 
 public class b17089 {
 	
-	public static class Pair{
-		int x;
-		int y;
-		Pair(int x, int y)
-		{
-			this.x =x;
-			this.y =y;
-		}
-		@Override
-		public int hashCode() {
-			return x + y;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (obj instanceof Pair) {
-				Pair p = (Pair) obj;
-				return (p.x == (x)) && (p.y == (y));
-			} else {
-				return false;
-			}
-		}
-	}
-	
 	public static void findMinimum(boolean[][] friend, int n, int[] indexList)
 	{
 		int cnt = 0;
