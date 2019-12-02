@@ -42,7 +42,8 @@ public class b16933 {
 		visit[0][0][0] = true;
 		while (!q.isEmpty()) {
 			int size = q.size();
-			while (size-- > 0) {
+			while (size-- > 0)
+			{
 				Player player = q.poll();
 				int x = player.x;
 				int y = player.y;
