@@ -8,13 +8,11 @@ public class b16953 {
 	public static class Pair {
 		long num;
 		int cnt;
-
 		Pair(long num, int cnt) {
 			this.num = num;
 			this.cnt = cnt;
 		}
 	}
-
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
