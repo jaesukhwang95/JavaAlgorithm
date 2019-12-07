@@ -55,10 +55,9 @@ public class b17141 {
 				int nx = p.x + dx[i];
 				int ny = p.y + dy[i];
 				if (0 <= nx && nx < n && 0 <= ny && ny < n) {
-					if(lab[nx][ny] == empty)
-					{
-						lab[nx][ny] = p.cnt+1;
-						q.offer(new Info(nx, ny, p.cnt+1));
+					if (lab[nx][ny] == empty) {
+						lab[nx][ny] = p.cnt + 1;
+						q.offer(new Info(nx, ny, p.cnt + 1));
 					}
 				}
 			}
@@ -66,22 +65,19 @@ public class b17141 {
 		int time = findTime(lab, n);
 		return time;
 	}
-	
-	public static int findTime(int [][] lab, int n)
-	{
+
+	public static int findTime(int[][] lab, int n) {
 		boolean signal = false;
 		int max = 0;
-		for(int i=0; i<n; i++)
-			for(int j=0; j<n; j++)
-			{
+		for (int i = 0; i < n; i++)
+			for (int j = 0; j < n; j++) {
 				max = Math.max(max, lab[i][j]);
-				if(lab[i][j] == empty)
-				{
+				if (lab[i][j] == empty) {
 					signal = true;
 					break;
 				}
 			}
-		if(signal)
+		if (signal)
 			return Integer.MAX_VALUE;
 		else
 			return max;
@@ -117,18 +113,10 @@ public class b17141 {
 
 		int[] indexArray = new int[m];
 		findMinimum(indexArray, cnt, m, 0, 0, virusList, lab, n);
-		if(min == Integer.MAX_VALUE)
+		if (min == Integer.MAX_VALUE)
 			System.out.println(-1);
 		else
 			System.out.println(min);
-//		for(int i=0; i<n; i++)
-//		{
-//			for(int j=0; j<n; j++)
-//			{
-//				System.out.print(lab[i][j]+" ");
-//			}
-//			System.out.println();
-//		}
 
 	}
 }
