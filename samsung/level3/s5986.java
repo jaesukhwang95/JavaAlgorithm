@@ -36,7 +36,8 @@ public class s5986 {
 				if (prime[endIdx++] > N)
 					break;
 			}
-			endIdx = endIdx - 2;
+
+			endIdx = endIdx - 1;
 			int cnt = 0;
 			for (int i = 0; i < endIdx; i++) {
 				for (int j = i; j < endIdx; j++) {
