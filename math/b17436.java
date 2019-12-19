@@ -5,7 +5,7 @@ import java.io.*;
 
 public class b17436 {
 
-	public static void getDividedNumber(int[] indexArray, int n, int r, int index, int target, char operation,
+	public static void updateDividedNumber(int[] indexArray, int n, int r, int index, int target, char operation,
 			long[] arr, long m) {
 		if (r == 0) {
 			long num = 1;
@@ -21,8 +21,8 @@ public class b17436 {
 		if (target == n)
 			return;
 		indexArray[index] = target;
-		getDividedNumber(indexArray, n, r - 1, index + 1, target + 1, operation, arr, m);
-		getDividedNumber(indexArray, n, r, index, target + 1, operation, arr, m);
+		updateDividedNumber(indexArray, n, r - 1, index + 1, target + 1, operation, arr, m);
+		updateDividedNumber(indexArray, n, r, index, target + 1, operation, arr, m);
 
 	}
 
@@ -44,7 +44,7 @@ public class b17436 {
 			char operation = '-';
 			if (r % 2 == 1)
 				operation = '+';
-			getDividedNumber(indexArray, n, r, 0, 0, operation, arr, m);
+			updateDividedNumber(indexArray, n, r, 0, 0, operation, arr, m);
 		}
 		System.out.println(sum);
 	}
