@@ -1,82 +1,67 @@
 package baekjoon.bruteForce;
+
 import java.util.*;
 import java.io.*;
 
 public class b16987 {
-	
-	public static class Egg{
+
+	public static class Egg {
 		int durability;
 		int weight;
-		Egg(int durability, int weight){
+
+		Egg(int durability, int weight) {
 			this.durability = durability;
 			this.weight = weight;
 		}
 	}
-	
-	public static void strikeEgg(int idx1, int idx2, Egg [] eggArray)
-	{
-		Egg Egg1 = eggArray[idx1];
-		Egg Egg2 = eggArray[idx2];
-		Egg1.durability = Egg1.durability - Egg2.weight;
-		Egg2.durability = Egg2.durability - Egg1.weight;
-		eggArray[idx1] = Egg1;
-		eggArray[idx2] = Egg2;
+
+	public static void strikeEgg(int idx1, int idx2, Egg[] eggArray) {
+		eggArray[idx1].durability = eggArray[idx1].durability - eggArray[idx2].weight;
+		eggArray[idx2].durability = eggArray[idx2].durability - eggArray[idx1].weight;
 	}
-	
-	public static void changeRound(int idx, int eggCount, Egg [] eggArray){
-		if(idx == eggCount)
-		{
-			for(int i=0; i<eggCount; i++)
-			{
-				System.out.println(eggArray[i].durability+" "+eggArray[i].weight);
-			}
+
+	public static void changeRound(int idx, int eggCount, Egg[] eggArray) {
+		if (idx == eggCount) {
 			int cnt = 0;
-			for(int i=0; i<eggCount; i++)
-			{
-				if(eggArray[i].durability < 0)
+			for (int i = 0; i < eggCount; i++) {
+				if (eggArray[i].durability <= 0)
 					cnt++;
 			}
 			max = Math.max(max, cnt);
 			return;
 		}
-		if(eggArray[idx].durability < 0)
-		{
-			changeRound(idx+1, eggCount, eggArray);
+		int brokenCnt = 0;
+		for (int i = 0; i < eggCount; i++) {
+			if (eggArray[i].durability <= 0)
+				brokenCnt++;
 		}
-		else
-		{
-			for(int i=0; i<eggCount; i++)
-			{
-				if(i == idx)
-				{
+		if (eggArray[idx].durability <= 0 || brokenCnt >= (eggCount - 1)) {
+			changeRound(idx + 1, eggCount, eggArray);
+		} else {
+			for (int i = 0; i < eggCount; i++) { 
+				if (i == idx) {
 					continue;
-				}
-				else if(eggArray[i].durability<0)
-				{
+				} else if (eggArray[i].durability <= 0) {
 					continue;
-				}
-				else
-				{
-					Egg Egg1 = eggArray[i];
-					Egg Egg2 = eggArray[idx];
+				} else {
+					int durabiltiy1 = eggArray[i].durability;
+					int durabiltiy2 = eggArray[idx].durability;
 					strikeEgg(i, idx, eggArray);
-					changeRound(idx+1, eggCount, eggArray);
-					eggArray[i] = Egg1;
-					eggArray[idx] = Egg2;
+					changeRound(idx + 1, eggCount, eggArray);
+					eggArray[i].durability = durabiltiy1;
+					eggArray[idx].durability = durabiltiy2;
 				}
 			}
-			changeRound(idx+1, eggCount, eggArray);
 		}
 	}
-	
+
 	public static int max = Integer.MIN_VALUE;
-	
-	public static void main(String[] args) throws IOException{
+
+	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int eggCount = Integer.parseInt(br.readLine());
-		Egg [] eggArray = new Egg[eggCount];
-		for(int i=0; i<eggCount; i++)
-		{
+		Egg[] eggArray = new Egg[eggCount];
+		for (int i = 0; i < eggCount; i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			eggArray[i] = new Egg(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
 		}
